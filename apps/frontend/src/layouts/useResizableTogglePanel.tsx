@@ -4,7 +4,8 @@ export function useResizableTogglePanel(defaultWidth: number, minWidth: number, 
     const [width, setWidth] = useState(defaultWidth)
     const startX = useRef(0)
     const startWidth = useRef(0)
-    const [activePanel, setActivePanel] = useState<string | null>(null);
+    const [activePanel, setActivePanel] = useState<LeftPanelId | null>(null);
+    type LeftPanelId = "explorer" | "search" | "git"
 
     const onPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
         e.currentTarget.setPointerCapture(e.pointerId) //capture point, if not, event will lost when mouse leave handler div

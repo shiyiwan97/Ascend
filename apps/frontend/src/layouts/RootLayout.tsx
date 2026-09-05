@@ -2,12 +2,21 @@ import { Outlet } from "react-router";
 import { useResizableTogglePanel } from "./useResizableTogglePanel";
 import { CircleFadingArrowUpIcon } from "lucide-react";
 import { Toggle } from "@/components/ui/toggle";
+import ExplorePanel from "@/features/sidebarPanel/ExplorePanel";
+import SearchPanel from "@/features/sidebarPanel/SearchPanel";
+import GitPanel from "@/features/sidebarPanel/GitPanel";
 
 
 
 export default function RootLayout() {
     const { width, onPointerDown, onPointerMove, onPointerUp, activePanel: activeLeftPanel, setActivePanel: setActiveLeftPanel } = useResizableTogglePanel(200, 100, 500)
     const leftSidebarWidth = activeLeftPanel ? width : 0;
+    const leftPanels = {
+        explorer: ExplorePanel,
+        search: SearchPanel,
+        git: GitPanel
+    }
+    const Panel = activeLeftPanel ? leftPanels[activeLeftPanel] : null
     return (
         <div className="grid grid-cols-[auto_auto_minmax(0,1fr)_300px] grid-rows-[auto_1fr_auto] h-screen overflow-hidden">
             <div className="col-span-4 h-12 bg-background">
@@ -26,9 +35,9 @@ export default function RootLayout() {
             </div>
             <aside className="relative border-r overflow-hidden bg-sidebar"
                 style={{ width: leftSidebarWidth }}>
-                <div >左侧边栏</div>
-                <div className="absolute right-0 top-0 w-2 h-full
-                hover:bg-amber-100 delay-100 hover:cursor-ew-resize"
+                <div>{Panel ? <Panel/> : 'warnnig, no panel selected'} </div>
+                <div className={`absolute right-0 top-0 w-2 h-full
+                hover:bg-amber-100 delay-100 ${activeLeftPanel ? 'hover:cursor-ew-resize' : ''}`}
                     onPointerMove={onPointerMove}
                     onPointerDown={onPointerDown}
                     onPointerUp={onPointerUp}
