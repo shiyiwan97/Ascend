@@ -1,3 +1,5 @@
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+
 class FileItem {
     public type: "Folder" | "File" | "Other";
     public name: string;
@@ -12,8 +14,8 @@ class FileItem {
         }
         this.type = type
         this.name = name
-        remark ?? (this.remark = remark)
-        children ?? (this.remark = remark)
+        remark || (this.remark = remark)
+        children || (this.remark = remark)
     }
 
 }
@@ -44,7 +46,23 @@ export default function ExplorePanel() {
 
 
 
-    return (
-        <div>ExplorePanel</div>
-    )
+    const renderFileItem = (data: FileItem) => {
+        if (data.type === "Folder") {
+            return (
+                <Collapsible>
+                    <CollapsibleTrigger>Toggle
+                        <CollapsibleContent>1111</CollapsibleContent>
+                    </CollapsibleTrigger>
+                </Collapsible>
+            )
+        } else if (data.type === "File") {
+            return (
+                <CollapsibleContent>1111</CollapsibleContent>
+            )
+
+        }
+    }
+
+    return testData.map(renderFileItem)
+
 }
