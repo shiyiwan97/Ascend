@@ -1,4 +1,7 @@
+import { Button } from "@/components/ui/button";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { Folder, FolderOpen, File } from "lucide-react";
+
 
 class FileItem {
     public type: "Folder" | "File" | "Other";
@@ -33,7 +36,11 @@ export default function ExplorePanel() {
             children: [{
                 type: "Folder",
                 name: "folderBA",
-                children: []
+                children: [{
+                    type: "File",
+                    name: "File2",
+                    children: []
+                }]
             }, {
                 type: "File",
                 name: "File1",
@@ -49,15 +56,22 @@ export default function ExplorePanel() {
     const renderFileItem = (data: FileItem) => {
         if (data.type === "Folder") {
             return (
-                <Collapsible>
-                    <CollapsibleTrigger>Toggle
-                        <CollapsibleContent>1111</CollapsibleContent>
-                    </CollapsibleTrigger>
+                <Collapsible className="group">
+                    <CollapsibleTrigger render={
+                        <Button variant="ghost" size="sm" className="w-full justify-start transition-none hover:bg-accent aria-expanded:bg-inherit aria-expanded:text-inherit">
+                            <Folder className="group-data-open:hidden" />
+                            <FolderOpen className="group-data-closed:hidden" />
+                            {data.name}
+                        </Button>} />
+                    <CollapsibleContent className="ml-5">
+                        {data.children.map((child) => renderFileItem(child))}
+                    </CollapsibleContent>
+
                 </Collapsible>
             )
         } else if (data.type === "File") {
             return (
-                <CollapsibleContent>1111</CollapsibleContent>
+                <CollapsibleContent render={<Button variant="ghost" size="sm" className="group w-full justify-start transition-none hover:bg-accent hover:text-accent-foreground"><File />{data.name}</Button>} />
             )
 
         }
