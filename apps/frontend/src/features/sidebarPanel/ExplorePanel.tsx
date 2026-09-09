@@ -52,11 +52,10 @@ export default function ExplorePanel() {
 
 
 
-
     const renderFileItem = (data: FileItem) => {
         if (data.type === "Folder") {
             return (
-                <Collapsible className="group">
+                <Collapsible className="group" key={data.name}>
                     <CollapsibleTrigger render={
                         <Button variant="ghost" size="sm" className="w-full justify-start transition-none hover:bg-accent aria-expanded:bg-inherit aria-expanded:text-inherit">
                             <Folder className="group-data-open:hidden" />
