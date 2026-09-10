@@ -70,7 +70,7 @@ export default function ExplorePanel() {
             )
         } else if (data.type === "File") {
             return (
-                <CollapsibleContent render={<Button variant="ghost" size="sm" className="group w-full justify-start transition-none hover:bg-accent hover:text-accent-foreground"><File />{data.name}</Button>} />
+                <Button variant="ghost" size="sm" className="group w-full justify-start transition-none hover:bg-accent hover:text-accent-foreground"><File />{data.name}</Button>
             )
 
         }
