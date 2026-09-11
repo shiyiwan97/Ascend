@@ -35,7 +35,7 @@ export default function RootLayout() {
             </div>
             <aside className="relative border-r overflow-hidden bg-sidebar"
                 style={{ width: leftSidebarWidth }}>
-                <div>{Panel ? <Panel/> : 'warnnig, no panel selected'} </div>
+                <div>{Panel ? <Panel /> : 'warnnig, no panel selected'} </div>
                 <div className={`absolute right-0 top-0 w-2 h-full
                 hover:bg-amber-100 delay-100 ${activeLeftPanel ? 'hover:cursor-ew-resize' : ''}`}
                     onPointerMove={onPointerMove}
